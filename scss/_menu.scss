@@ -1,0 +1,175 @@
+.nav {
+    background-color: $primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    .no-flexboxlegacy & {
+        flex-direction: column;
+    }
+    @media screen and (min-width:992px){
+        & .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
+    }
+
+    &__logo {
+        text-transform: uppercase;
+        font-size: 1.8rem;
+        line-height: 1.2;
+        color: $secondary-color;
+        margin: 0;
+        text-align: center;
+        @media screen and (min-width:992px){
+            font-size: 2.4rem;
+        }
+    }
+        
+    
+
+    &__menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+   
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        
+        z-index: -1;
+        width: 100vw;
+        height: 100vh;
+        background-color:$primary-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        will-change: transfrom;
+
+        transform: scale(.1);
+        opacity: 0;
+
+        @media screen and (min-width:992px){
+            position: relative; 
+            opacity: 1;
+            background: transparent;
+            flex-direction: row;
+            height: auto;
+            width: auto;
+            z-index: 1;
+            transform: scale(1);
+            padding: 25px 0;
+            
+        }
+
+
+        @include tr();
+        .opened &{
+            transform: scale(1);
+            opacity: 1;
+            z-index: 9;
+        }
+    }
+
+    &__item  {
+        margin-bottom: 10px;
+        @media screen and (min-width:992px){
+            margin: 0;
+            text-transform: uppercase;
+            & + & {
+                margin-left: 50px;
+            } 
+        }
+    }
+
+    &__link {
+        font-size: 2.8rem;
+        color: $secondary-color;
+        font-family: $title-ff;
+        @media screen and (min-width:992px){
+            position: relative;
+            font-size: 1.4rem;
+            padding-top: 10px;
+            border-top: $border-width solid $primary-color;
+            border-radius: $border-width + 2;
+            &::before{
+                content:"";
+                @include posA(10%,50%,-50%,-50%);
+                width: 0;
+                height: 0;
+                opacity: 0;
+                border-width: 5px 5px 0 5px;
+                border-color: $secondary-color transparent transparent transparent;
+                border-style: solid;
+                @include tr();
+            }
+            @include tr();
+            @include hover {
+              
+                border-top: $border-width solid $secondary-color;
+                &::before{
+                  
+                    opacity: 1;
+                }
+
+            }
+          
+        }
+    }
+}
+.opened{
+    overflow: hidden;
+}
+.mobileMenu{
+        display: block;
+        z-index: 10;
+        padding: 10px 10px 0 10px;
+        position: fixed;
+        right: 10px;
+        top: 10px;
+        @media screen and (min-width:992px){
+            display: none;
+        }
+      & span{
+          position: relative;
+          width: 35px;
+          height: 6px;
+          background: #000;
+          display: block;
+          transition: .5s;
+          margin-bottom: 8px;
+      
+             &:nth-child(1){
+                transform-origin: left;
+            }
+             &:nth-child(2){
+                transform-origin: center;
+            }
+             &:nth-child(3){
+                transform-origin: left;
+            }
+            .opened  & {
+                background:#fff;
+                border-radius: 50%;
+            }
+            .opened &:nth-child(1){
+               transform: rotate(45deg);
+               top: 2.5px;
+               left: 2px;
+           
+            }
+            .opened &:nth-child(2){
+               transform: rotate(315deg);
+               top: 1px;
+               right:3px;
+              
+            }
+            .opened &:nth-child(3){
+                transform: scaleX(0);
+            }
+      }
+}
